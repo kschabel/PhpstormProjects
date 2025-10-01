@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST" action="">
     <hr>
     <h1>My Form</h1>
-    <p>Please fill out our contact form:</p>
+    <p><u>Please fill out our contact form:</u></p>
     <p><i>(all fields with * are required)</i></p><br>
 
     <label><strong>*Name:</strong></label><br>
@@ -71,12 +71,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Thank you for your message!</h2>
     <p>We will respond as soon as possible.</p>
     <p><u>Your information:</u></p>
-        <p><strong>
-        Name: <?= htmlspecialchars($lastMessage['name']) ?><br>
-        Email: <?= htmlspecialchars($lastMessage['email']) ?><br>
-        Message: <?= htmlspecialchars($lastMessage['message']) ?><br>
-        Time: <?= $lastMessage['time'] ?>
+    <p><strong>
+            Name: <?= htmlspecialchars($lastMessage['name']) ?><br>
+            Email: <?= htmlspecialchars($lastMessage['email']) ?><br>
+            Message: <?= htmlspecialchars($lastMessage['message']) ?><br>
+            Time: <?= $lastMessage['time'] ?>
         </strong></p>
+
+    <hr>
+    <h3>All Messages</h3>
+    <!-- HTML table with all entries from DB -->
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Message</th>
+            <th>Timestamp</th>
+        </tr>
+        <?php
+        // Fetch all rows from DB and display them
+        $stmt = $PDO->query("SELECT * FROM formInputs ORDER BY id DESC");
+        foreach ($stmt as $row) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['message']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['time']) . "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </table>
 <?php endif; ?>
+
 </body>
 </html>
+
