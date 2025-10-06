@@ -12,7 +12,7 @@
 
     <!-- Input + Add Button -->
     <div id="todo-btn" class="todo-add">
-        <input id="todo-input" type="text" placeholder="Add a new task...">
+        <input id="todo-input" type="text" ’placeholder="Add a new task...">
         <button id="add-task">+Add</button>
     </div>
 
@@ -26,15 +26,11 @@
         </ul>
     </section>
 
-    <br>
-
     <!-- Expired section -->
     <section>
         <h2>Expired tasks:</h2>
         <ul id="expired-list" class="todo-list"></ul>
     </section>
-
-    <br>
 
     <!-- Done section -->
     <section>
@@ -42,7 +38,6 @@
         <ul id="done-list" class="todo-list"></ul>
     </section>
 
-    <br>
     <hr>
 
     <!-- Legend -->
