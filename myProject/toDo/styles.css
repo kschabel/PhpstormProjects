@@ -1,0 +1,112 @@
+/* General styles */
+body {
+    font-family: "Cantarell", "Helvetica", "Arial", sans-serif;
+    background-color: antiquewhite;
+}
+
+h1 {
+    color: #000000;
+}
+
+button {
+    font-size: small;
+    cursor: pointer;
+}
+
+#list {
+    color: orange;
+    font-weight: bold;
+}
+
+/* Status colors */
+.done {
+    color: green;
+    font-weight: bold;
+}
+
+.pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.expired {
+    color: red;
+    font-weight: bold;
+}
+
+/* To-do list styling */
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.todo-list li {
+    display: flex;              /* Buttons und Text nebeneinander */
+    align-items: center;        /* vertikal zentriert */
+    gap: 12px;
+    margin: 8px 0;
+    padding: 6px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+/* Textarea */
+.task-text {
+    flex: 1;
+}
+
+/* Actions only for pending tasks */
+.pending .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-right: 10px;
+}
+
+.done .actions,
+.expired .actions {
+    display: none;
+}
+
+/* Action buttons */
+.actions button {
+    border: 1px solid #ccc;
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 14px;
+    width: 32px;
+    height: 28px;
+    text-align: center;
+}
+
+.done-btn {
+    border-color: green;
+    color: green;
+}
+.done-btn:hover {
+    background: green;
+    color: white;
+}
+
+.expired-btn {
+    border-color: red;
+    color: red;
+}
+.expired-btn:hover {
+    background: red;
+    color: white;
+}
+
+/* Legend styles */
+.legend {
+    margin-top: 30px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px dashed #aaa;
+    border-radius: 6px;
+}
+.legend h3 {
+    margin-top: 0;
+}
