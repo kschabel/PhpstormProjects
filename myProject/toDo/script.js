@@ -1,43 +1,52 @@
-// Task arrays
 let pendingTasks = [];
-let expiredTasks = [];
 let doneTasks = [];
+let expiredTasks = [];
 
-// Wait until the page is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("add-task").addEventListener("click", add);
-    renderAll(); // render empty lists at start
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadTasks();
+
+    document.getElementById("add-task").addEventListener("click", async () => {
+        await add();
+        await loadTasks();
+    });
 });
 
-// Function: render all task lists
-function renderAll() {
-    renderPendingTasks();
-    renderExpiredTasks();
-    renderDoneTasks();
+async function loadTasks() {
+    const res = await fetch("/api/get.php");
+    const data = await res.json();
+
+    pendingTasks = data.pending;
+    doneTasks = data.done ?? [];
+    expiredTasks = data.expired ?? [];
+
+    renderAll();
 }
 
-// Function: render all pending tasks
+function renderAll() {
+    renderPendingTasks();
+    renderDoneTasks();
+    renderExpiredTasks();
+}
+
 function renderPendingTasks() {
     const list = document.getElementById("list");
-    // clear list first 
     list.replaceChildren();
-    pendingTasks.forEach((text, index) => {
+
+    pendingTasks.forEach(task => {
         const li = document.createElement("li");
         li.className = "pending";
-        // Create action buttons
+
         const doneButton = document.createElement("button");
         doneButton.textContent = "✅";
-        doneButton.className = "done-button";
-        doneButton.addEventListener("click", () => handleDone(index));
+        doneButton.addEventListener("click", () => markDone(task.id));
+
         const expiredButton = document.createElement("button");
         expiredButton.textContent = "❌";
-        expiredButton.className = "expired-button";
-        expiredButton.addEventListener("click", () => handleExpired(index));
-        // Task text
+        expiredButton.addEventListener("click", () => markExpired(task.id));
+
         const span = document.createElement("span");
-        span.className = "task-text";
-        span.textContent = text;
-        // Add elements together
+        span.textContent = task.text;
+
         li.appendChild(doneButton);
         li.appendChild(expiredButton);
         li.appendChild(span);
@@ -45,60 +54,57 @@ function renderPendingTasks() {
     });
 }
 
-// Function: render all expired tasks
-function renderExpiredTasks() {
-    const list = document.getElementById("expired-list");
-    list.replaceChildren();
-    expiredTasks.forEach((text) => {
-        const li = document.createElement("li");
-        li.className = "expired";
-        li.textContent = text;
-        list.appendChild(li);
-    });
-}
-
-// Function: render all done tasks
 function renderDoneTasks() {
     const list = document.getElementById("done-list");
     list.replaceChildren();
-    doneTasks.forEach((text) => {
+    doneTasks.forEach(task => {
         const li = document.createElement("li");
-        li.className = "done";
-        li.textContent = text;
+        li.textContent = task.text;
         list.appendChild(li);
     });
 }
 
-// Function: when +Add button clicked
-function add() {
+function renderExpiredTasks() {
+    const list = document.getElementById("expired-list");
+    list.replaceChildren();
+    expiredTasks.forEach(task => {
+        const li = document.createElement("li");
+        li.textContent = task.text;
+        list.appendChild(li);
+    });
+}
+
+async function add() {
     const input = document.getElementById("todo-input");
     const text = input.value.trim();
-    // ignore empty input
     if (!text) return;
-    // add to pending
-    pendingTasks.push(text);
-    // clear input
+
+    const formData = new FormData();
+    formData.append("task", text);
+
+    await fetch("/api/add.php", { method: "POST", body: formData });
+
     input.value = "";
-    // re-render all lists
-    renderAll();
+    await loadTasks();
 }
 
-// Function: handle ✅ button
-function handleDone(index) {
-    // move task to done
-    doneTasks.push(pendingTasks[index]);
-    // remove from pending
-    pendingTasks.splice(index, 1);
-    // re-render
-    renderAll();
+async function markDone(id) {
+    const formData = new FormData();
+    formData.append("id", id);
+    await fetch("/api/addDone.php", { method: "POST", body: formData });
+    await loadTasks();
 }
 
-// Function: handle ❌ button
-function handleExpired(index) {
-    // move to expired
-    expiredTasks.push(pendingTasks[index]);
-    // remove from pending
-    pendingTasks.splice(index, 1);
-    // re-render
-    renderAll(); // re-render
+async function markExpired(id) {
+    const formData = new FormData();
+    formData.append("id", id);
+    await fetch("/api/addExpired.php", { method: "POST", body: formData });
+    await loadTasks();
+}
+
+async function deleteTask(id) {
+    const formData = new FormData();
+    formData.append("id", id);
+    await fetch("/api/delete.php", { method: "POST", body: formData });
+    await loadTasks();
 }
