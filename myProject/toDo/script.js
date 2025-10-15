@@ -118,7 +118,7 @@ function renderExpiredTasks() {
 
         // Edit button for expired tasks
         const editButton = document.createElement("button");
-        editButton.textContent = "c";
+        editButton.textContent = "✏️";
         editButton.addEventListener("click", () => startEdit(task.id));
 
         // Move Task
