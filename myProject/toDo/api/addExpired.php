@@ -13,5 +13,5 @@ $stmt->bind_param('i', $id);
 $stmt->execute();
 $stmt->close();
 
-// Return updated list
-include __DIR__ . '/get.php';
+echo json_encode(['success' => false]);
+die();

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/db.php';
-header('Content-Type: application/json');
+/* @var mysqli $mysqli */
+
 
 $sql = "SELECT id, text, status, created_at FROM tasks ORDER BY created_at DESC";
 $result = $mysqli->query($sql);
@@ -19,4 +20,6 @@ while ($row = $result->fetch_assoc()) {
     ];
 }
 
+header('Content-Type: application/json');
 echo json_encode($output);
+die();
