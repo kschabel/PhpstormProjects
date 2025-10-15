@@ -59,7 +59,7 @@ function renderPendingTasks() {
 
         // Move Task
         const moveButton = document.createElement("button");
-        moveButton.textContent = "🔄";
+        moveButton.textContent = "c";
         moveButton.addEventListener("click", () => showMoveOptions(task.id));
 
         // Task text
@@ -118,7 +118,7 @@ function renderExpiredTasks() {
 
         // Edit button for expired tasks
         const editButton = document.createElement("button");
-        editButton.textContent = "✏️";
+        editButton.textContent = "c";
         editButton.addEventListener("click", () => startEdit(task.id));
 
         // Move Task
