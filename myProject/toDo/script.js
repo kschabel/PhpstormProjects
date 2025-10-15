@@ -59,7 +59,7 @@ function renderPendingTasks() {
 
         // Move Task
         const moveButton = document.createElement("button");
-        moveButton.textContent = "c";
+        moveButton.textContent = "🔄";
         moveButton.addEventListener("click", () => showMoveOptions(task.id));
 
         // Task text
