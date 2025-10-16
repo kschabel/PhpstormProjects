@@ -4,43 +4,48 @@
     <meta charset="UTF-8">
     <title>My To-Do List</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 <main class="todo-app">
     <h1>📝 My To-Do List</h1>
 
     <!-- Input + Add Button -->
-    <div id="todo-btn" class="todo-add">
-        <input id="todo-input" type="text" ’placeholder="Add a new task...">
-        <button id="add-task">+Add</button>
+    <div class="todo-add">
+        <input id="todo-input" type="text" placeholder="Add a new task...">
+        <button id="add-task">+ Add</button>
     </div>
-
-    <br>
 
     <!-- Pending section -->
     <section>
         <h2>Pending tasks:</h2>
-        <ul id="list" class="todo-list">
-            <!-- Tasks will be added here -->
-        </ul>
+        <button class="toggle-btn" id="pending-toggle" onclick="toggleTasks('pending', true)">
+            Show all (<span id="pending-count">0</span>)
+        </button>
+        <ul id="pending-list" class="todo-list" style="display:none;"></ul>
     </section>
 
     <!-- Expired section -->
     <section>
         <h2>Expired tasks:</h2>
-        <ul id="expired-list" class="todo-list"></ul>
+        <button class="toggle-btn" id="expired-toggle" onclick="toggleTasks('expired')">
+            Show all (<span id="expired-count">0</span>)
+        </button>
+        <ul id="expired-list" class="todo-list" style="display:none;"></ul>
     </section>
 
     <!-- Done section -->
     <section>
         <h2>Done tasks:</h2>
-        <ul id="done-list" class="todo-list"></ul>
+        <button class="toggle-btn" id="done-toggle" onclick="toggleTasks('done')">
+            Show all (<span id="done-count">0</span>)
+        </button>
+        <ul id="done-list" class="todo-list" style="display:none;"></ul>
     </section>
 
     <hr>
 
-    <!-- Legend (static) -->
+    <!-- Legend -->
     <section class="legend">
         <h3><u>Legend:</u></h3>
         <p><span class="pending">Pending</span> = Task still open (choose ✅ or ❌)</p>

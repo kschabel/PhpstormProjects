@@ -14,10 +14,7 @@ h1, h2, h3 {
     color: #333;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
+h1 { text-align: center; margin-bottom: 20px; }
 
 main.todo-app {
     max-width: 600px;
@@ -46,10 +43,7 @@ main.todo-app {
     font-size: 16px;
 }
 
-#todo-input:focus {
-    outline: none;
-    border-color: #888;
-}
+#todo-input:focus { outline: none; border-color: #888; }
 
 #add-task {
     background: #007bff;
@@ -62,31 +56,18 @@ main.todo-app {
     font-size: 15px;
 }
 
-#add-task:hover {
-    background: #005ecb;
-}
+#add-task:hover { background: #005ecb; }
 
 /* ===========================
    TASK LIST SECTIONS
 =========================== */
-section {
-    margin-bottom: 25px;
-}
-
-h2 {
-    font-size: 18px;
-    color: #444;
-    margin-bottom: 8px;
-}
+section { margin-bottom: 25px; }
+h2 { font-size: 18px; color: #444; margin-bottom: 8px; }
 
 /* ===========================
    TASK LIST
 =========================== */
-.todo-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+.todo-list { list-style: none; padding: 0; margin: 0; }
 
 .todo-list li {
     display: flex;
@@ -100,32 +81,15 @@ h2 {
     transition: background 0.2s ease;
 }
 
-.todo-list li:hover {
-    background: #f0f0f0;
-}
-
-.task-text {
-    flex: 1;
-    font-size: 15px;
-}
+.todo-list li:hover { background: #f0f0f0; }
+.task-text { flex: 1; font-size: 15px; }
 
 /* ===========================
    STATUS COLORS
 =========================== */
-.pending {
-    color: orange;
-    font-weight: bold;
-}
-
-.done {
-    color: green;
-    font-weight: bold;
-}
-
-.expired {
-    color: red;
-    font-weight: bold;
-}
+.pending { color: orange; font-weight: bold; }
+.done { color: green; font-weight: bold; }
+.expired { color: red; font-weight: bold; }
 
 /* ===========================
    BUTTONS
@@ -139,37 +103,22 @@ button {
     transition: all 0.2s ease;
 }
 
-button:focus {
-    outline: none;
-}
+button:focus { outline: none; }
 
-/* ✅ Done button */
-button.done-btn,
-button:contains("✅") {
-    border-color: green;
-    color: green;
-    background: #fff;
-}
-
-button.done-btn:hover,
-button:contains("✅"):hover {
-    background: green;
+/* Toggle show all button */
+.toggle-btn {
+    display: inline-block;
+    background-color: #007bff;
     color: #fff;
+    border: none;
+    padding: 6px 12px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
-/* ❌ Expired button */
-button.expired-btn,
-button:contains("❌") {
-    border-color: red;
-    color: red;
-    background: #fff;
-}
-
-button.expired-btn:hover,
-button:contains("❌"):hover {
-    background: red;
-    color: #fff;
-}
+.toggle-btn:hover { background-color: #0056b3; }
 
 /* ===========================
    LEGEND BOX
@@ -183,10 +132,5 @@ button:contains("❌"):hover {
     font-size: 14px;
 }
 
-.legend h3 {
-    margin-top: 0;
-}
-
-.legend p {
-    margin: 6px 0;
-}
+.legend h3 { margin-top: 0; }
+.legend p { margin: 6px 0; }

@@ -29,4 +29,3 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $mysqli->close();
-?>
