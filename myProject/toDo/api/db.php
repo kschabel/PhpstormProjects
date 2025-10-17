@@ -12,7 +12,7 @@ $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 // Check connection
 if ($mysqli->connect_error) {
-    die("DB connection failed: (" . $mysqli->connect_error . ") " . $mysqli->connect_error);
+    die("MySQL DB connection failed: (" . $mysqli->connect_error . ") " . $mysqli->connect_error);
 }
 
 // Set charset to UTF-8

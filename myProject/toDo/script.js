@@ -1,13 +1,11 @@
-// ===========================
+
 // TASK ARRAYS
-// ===========================
 let pendingTasks = [];
 let doneTasks = [];
 let expiredTasks = [];
 
-// ===========================
+
 // INITIALIZE PAGE
-// ===========================
 document.addEventListener("DOMContentLoaded", async () => {
     await loadTaskCounts();
 
@@ -15,14 +13,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (addTaskButton) {
         addTaskButton.addEventListener("click", async () => {
             await addTask();
-            await toggleTasks('pending', true); // auto-show pending tasks
+            // auto-show pending tasks
+            await toggleTasks('pending', true);
         });
     }
 });
 
-// ===========================
+
 // LOAD COUNTS ONLY
-// ===========================
 async function loadTaskCounts() {
     const response = await fetch("/api/hideTasks.php");
     const data = await response.json();
@@ -36,9 +34,8 @@ async function loadTaskCounts() {
     document.getElementById("expired-count").textContent = expiredTasks.length;
 }
 
-// ===========================
+
 // TOGGLE CATEGORY LIST
-// ===========================
 async function toggleTasks(category, forceOpen = false) {
     const listEl = document.getElementById(category + '-list');
     if (!listEl) return;
@@ -46,16 +43,16 @@ async function toggleTasks(category, forceOpen = false) {
     const isHidden = listEl.style.display === 'none';
     if (forceOpen || isHidden) {
         listEl.style.display = 'block';
-        listEl.replaceChildren(); // clear previous children
+        // clear previous children
+        listEl.replaceChildren();
         await loadTasksByCategory(category);
     } else {
         listEl.style.display = 'none';
     }
 }
 
-// ===========================
+
 // LOAD TASKS PER CATEGORY
-// ===========================
 async function loadTasksByCategory(category) {
     let tasks;
     if (category === 'pending') tasks = pendingTasks;
@@ -104,9 +101,8 @@ async function loadTasksByCategory(category) {
     });
 }
 
-// ===========================
+
 // ADD NEW TASK
-// ===========================
 async function addTask() {
     const input = document.getElementById("todo-input");
     const text = input.value.trim();
@@ -120,9 +116,8 @@ async function addTask() {
     await loadTaskCounts();
 }
 
-// ===========================
+
 // MARK DONE
-// ===========================
 async function markDone(id) {
     const formData = new FormData();
     formData.append("id", id);
@@ -131,9 +126,8 @@ async function markDone(id) {
     await refreshCategory('done');
 }
 
-// ===========================
+
 // MARK EXPIRED
-// ===========================
 async function markExpired(id) {
     const formData = new FormData();
     formData.append("id", id);
@@ -142,9 +136,8 @@ async function markExpired(id) {
     await refreshCategory('expired');
 }
 
-// ===========================
+
 // REFRESH CATEGORY LIST
-// ===========================
 async function refreshCategory(category) {
     await loadTaskCounts();
     const listEl = document.getElementById(category + '-list');
@@ -155,9 +148,8 @@ async function refreshCategory(category) {
     }
 }
 
-// ===========================
+
 // START EDIT
-// ===========================
 async function startEdit(id) {
     const li = document.querySelector(`li[data-id="${id}"]`);
     if (!li) return;
@@ -196,9 +188,8 @@ async function startEdit(id) {
     input.select();
 }
 
-// ===========================
+
 // SAVE EDIT
-// ===========================
 async function saveEdit(id, newText) {
     const formData = new FormData();
     formData.append("id", id);
@@ -209,9 +200,8 @@ async function saveEdit(id, newText) {
     await refreshCategory(category);
 }
 
-// ===========================
+
 // MOVE TASK
-// ===========================
 async function moveTask(id, newStatus) {
     const formData = new FormData();
     formData.append("id", id);
@@ -226,9 +216,8 @@ async function moveTask(id, newStatus) {
     await refreshCategory(newStatus);
 }
 
-// ===========================
+
 // SHOW MOVE OPTIONS
-// ===========================
 function showMoveOptions(id) {
     const li = document.querySelector(`li[data-id="${id}"]`);
     if (!li) return;
@@ -261,9 +250,8 @@ function showMoveOptions(id) {
     li.appendChild(cancelButton);
 }
 
-// ===========================
+
 // HELPER FUNCTIONS
-// ===========================
 function getTaskCategory(id) {
     if (pendingTasks.find(t => t.id == id)) return 'pending';
     if (doneTasks.find(t => t.id == id)) return 'done';

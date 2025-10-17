@@ -37,3 +37,4 @@ if ($status && in_array($status, ['pending','done','expired'])) {
 }
 
 $mysqli->close();
+
